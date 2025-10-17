@@ -1,0 +1,341 @@
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Roboto:wght@400;700&display=swap');
+
+/* === ESTILOS BASE === */
+body {
+    background-color: #000; 
+    background-image: url("logo.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50% auto; 
+    color: #f1f1f1;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: background 0.3s, color 0.3s;
+    min-height: 100vh; 
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+/* === ENCABEZADO Y ALINEACIÓN DE LOGIN === */
+header {
+    background-color: #1a1a1a;
+    display: flex;
+    justify-content: space-between; /* 💡 CRÍTICO: Separa el título del login */
+    align-items: center;
+    padding: 1rem 2rem;
+    border-bottom: 2px solid #ff4500;
+    gap: 1rem;
+}
+
+.header-logo-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.auth-header-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-auth-btn {
+    padding: 0.5rem 1rem;
+    width: auto;
+    white-space: nowrap; 
+}
+
+.header-user-info {
+    font-size: 0.9rem;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    margin: 0; /* Asegura que no haya margen extra */
+}
+
+h1 {
+    font-family: 'Creepster', cursive;
+    color: #ff4500;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    margin: 0;
+    flex-grow: 1; 
+    text-align: left;
+}
+
+.logo {
+    height: 70px;
+    width: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
+    transition: transform 0.3s ease;
+    min-width: 50px; 
+}
+
+.logo:hover {
+    transform: scale(1.1);
+}
+
+/* === OCULTAR LOGIN ANTIGUO === */
+.auth-container {
+    display: none !important; 
+}
+
+
+/* === ESTILOS BASE DE BOTONES === */
+.auth-btn {
+    background-color: #ff4500;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1.2rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s ease, background-color 0.3s;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+.auth-btn:hover {
+    background-color: #e63e00;
+    transform: scale(1.01);
+}
+
+.user-text {
+    color: #ff4500;
+    font-weight: bold;
+}
+
+/* === CONTADOR REGRESIVO === */
+#countdown {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+#timer {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff4500;
+    margin-top: 0.5rem;
+    font-family: 'Creepster', cursive;
+}
+
+/* === RANKING / GRID DE PELÍCULAS === */
+.ranking-title {
+    text-align: center;
+    color: #ff4500;
+    font-family: 'Creepster', cursive;
+    font-size: 2.5rem;
+    margin-top: 2rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+.movie-card {
+    background-color: rgba(34, 34, 34, 0.85); 
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(255, 69, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: float 4s ease-in-out infinite;
+    cursor: pointer;
+}
+
+.movie-card:hover {
+    transform: scale(1.05) translateY(-5px); 
+    box-shadow: 0 0 25px rgba(255, 69, 0, 0.6);
+}
+
+/* 💡 ESTILOS PARA LA PORTADA Y TRAILER EN LA TARJETA (Restaurados) */
+.movie-poster {
+    width: 100%;
+    height: 380px; 
+    object-fit: cover;
+    display: block;
+}
+
+.trailer-wrap {
+    margin: 10px 0;
+}
+
+.movie-info {
+    padding: 1rem;
+}
+
+.movie-info h3 {
+    color: #ff4500;
+    font-family: 'Creepster', cursive;
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+}
+
+.btn-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.vote-btn, .details-btn {
+    padding: 0.8rem;
+    margin: 0;
+}
+
+.vote-btn {
+    flex-grow: 2;
+}
+
+.vote-btn[disabled] {
+    background-color: #6a6a6a;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.details-btn {
+    flex-grow: 1;
+    background-color: #4a4a4a;
+}
+.details-btn:hover {
+    background-color: #6a6a6a;
+}
+
+
+/* === MODAL DE DETALLES (Puro Texto) === */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.95);
+    overflow: auto;
+    padding: 0; 
+}
+
+.modal-content {
+    background: #1a1a1a;
+    color: #fff;
+    margin: 20px auto; 
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%; 
+    max-width: 800px;
+    position: relative;
+    border: 3px solid #ff4500;
+    box-shadow: 0 0 30px rgba(255, 69, 0, 0.5);
+}
+
+#close-modal {
+    position: absolute;
+    top: 10px; right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    background: none;
+    color: #ff4500;
+    padding: 0;
+}
+#close-modal:hover {
+    color: white;
+    transform: scale(1.1);
+}
+
+/* 💡 ESTILOS PARA EL CONTENEDOR DE TEXTO EN EL MODAL */
+#details-text-container {
+    padding: 10px 0;
+}
+
+#details-text-container h3 {
+    color: #ff4500; 
+    font-family: 'Creepster', cursive;
+    border-bottom: 1px solid rgba(255, 69, 0, 0.4);
+    padding-bottom: 5px;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+#details-text-container p {
+    margin: 0.5rem 0;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+/* === PIE DE PÁGINA === */
+footer {
+    text-align: center;
+    padding: 1rem;
+    border-top: 2px solid #ff4500;
+    background-color: #1a1a1a;
+    margin-top: 2rem;
+}
+
+/* === MEDIA QUERIES (RESPONSIVE) === */
+@media (max-width: 768px) {
+    header {
+        flex-wrap: wrap; 
+        padding: 0.8rem 1rem;
+    }
+    
+    .header-logo-title {
+        width: 100%; 
+        justify-content: center;
+        margin-bottom: 0.5rem;
+        order: 1;
+    }
+
+    .auth-header-container {
+        width: 100%; 
+        justify-content: center;
+        margin-bottom: 0.5rem;
+        order: 2;
+    }
+    
+    h1 {
+        font-size: 1.6rem;
+        text-align: center; 
+        flex-grow: 0;
+    }
+    
+    .logo {
+        height: 50px;
+    }
+    
+    #timer {
+        font-size: 1.5rem;
+    }
+    
+    .ranking-title {
+        font-size: 2rem;
+    }
+    .grid {
+        padding: 1rem;
+        gap: 1rem;
+    }
+    .movie-card {
+        animation: none;
+    }
+    .movie-poster {
+        height: 300px;
+    }
+    
+    .modal-content {
+        margin: 10px auto;
+        padding: 15px;
+    }
+}
